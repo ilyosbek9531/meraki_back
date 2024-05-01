@@ -51,6 +51,41 @@ CREATE TABLE "Users" (
     CONSTRAINT "Users_pkey" PRIMARY KEY ("id")
 );
 
+-- CreateTable
+CREATE TABLE "Services" (
+    "id" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "content" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Services_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "ProjectCategories" (
+    "id" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "ProjectCategories_pkey" PRIMARY KEY ("id")
+);
+
+-- CreateTable
+CREATE TABLE "Projects" (
+    "id" TEXT NOT NULL,
+    "image" TEXT NOT NULL,
+    "title" TEXT NOT NULL,
+    "description" TEXT NOT NULL,
+    "project_category_id" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP(3) NOT NULL,
+
+    CONSTRAINT "Projects_pkey" PRIMARY KEY ("id")
+);
+
 -- CreateIndex
 CREATE UNIQUE INDEX "Tables_slug_key" ON "Tables"("slug");
 
@@ -63,8 +98,20 @@ CREATE UNIQUE INDEX "Users_email_key" ON "Users"("email");
 -- CreateIndex
 CREATE UNIQUE INDEX "Users_phone_number_key" ON "Users"("phone_number");
 
+-- CreateIndex
+CREATE UNIQUE INDEX "Services_title_key" ON "Services"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "ProjectCategories_title_key" ON "ProjectCategories"("title");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Projects_title_key" ON "Projects"("title");
+
 -- AddForeignKey
 ALTER TABLE "Permissions" ADD CONSTRAINT "Permissions_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "Roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Users" ADD CONSTRAINT "Users_role_id_fkey" FOREIGN KEY ("role_id") REFERENCES "Roles"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Projects" ADD CONSTRAINT "Projects_project_category_id_fkey" FOREIGN KEY ("project_category_id") REFERENCES "ProjectCategories"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
