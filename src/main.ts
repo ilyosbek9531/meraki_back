@@ -12,8 +12,8 @@ async function bootstrap() {
     .setTitle("Meraki")
     .setDescription("developed by WIUT students")
     .setVersion("1.0")
-    .addServer("https://meraki-back.onrender.com/", "Online Environment")
     .addServer("http://localhost:3000", "Local Environment")
+    .addServer("https://meraki-back.onrender.com/", "Online Environment")
     .addBearerAuth()
     .build();
 
