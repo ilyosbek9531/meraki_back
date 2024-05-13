@@ -49,9 +49,9 @@ model Users {
   id                String     @id @default(uuid())
   first_name        String?
   last_name         String?
-  email             String     @unique
-  phone_number      String     @unique
-  hashed_password   String
+  username          String     @unique
+  phone_number      String?    @unique
+  password          String
   roles             Roles      @relation(fields: [role_id], references: [id], onUpdate: Cascade)
   role_id           String
   active            Boolean    @default(false)
